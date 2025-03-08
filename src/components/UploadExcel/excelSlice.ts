@@ -8,6 +8,7 @@ interface ExcelState {
     Planning: Record<string, any>,
     Calculations: Record<string, any>
     Chart: Record<string, any>
+    open: boolean;
 }
 
 const initialState: ExcelState = {
@@ -17,7 +18,8 @@ const initialState: ExcelState = {
     Calender: {},
     Planning: {},
     Calculations: {},
-    Chart: {}
+    Chart: {},
+    open: false,
 };
 
 const excelSlice = createSlice({
@@ -44,14 +46,17 @@ const excelSlice = createSlice({
                 case "Chart":
                     state.Chart = action.payload.data;
                     break;
-                default: state.excelData = action.payload;
+                default: state.excelData = action.payload.data;
             }
         },
         clearExcelData: (state) => {
             state.excelData = [];
         },
+        setPopupState: (state, action) => {
+            state.open = action.payload;
+        }
     },
 });
 
-export const { setExcelData, clearExcelData } = excelSlice.actions;
+export const { setExcelData, clearExcelData,setPopupState } = excelSlice.actions;
 export default excelSlice.reducer;
