@@ -2,10 +2,15 @@ import React, { useState } from "react";
 import "./Home.css";
 import Nav from "./Nav";
 import Upload from "./UploadExcel/UploadExcel";
+import { useSelector } from "react-redux";
+import { RootState } from "../store/store";
 import Store from "./Store/Store";
 
 function Home() {
     const [Component, setComponent] = useState<JSX.Element >(<Store/>);
+    
+    const excelData = useSelector((state: RootState) => state.excel.excelData);
+    console.log(excelData,'excel')
     function onNavClick(Component: React.ComponentType) {
         setComponent(<Component />);
     }
