@@ -1,0 +1,21 @@
+
+  .mainSection{
+    position: relative;
+    top: 50px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    justify-content: center;
+    min-height:400px;
+  }
+  nav {
+    background: lightgreen;
+    width: 200px; /* Adjust as needed */
+    padding: 20px; 
+  }
+  
+  main {
+    background: lightgray;
+    flex: 1;
+    padding: 20px;
+  }
