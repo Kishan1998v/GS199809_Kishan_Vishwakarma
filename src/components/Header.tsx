@@ -3,6 +3,7 @@ import { useDispatch,useSelector } from "react-redux";
 import { setPopupState} from "./UploadExcel/excelSlice";
 import { RootState } from "../../store/store";
 import Button from "./Common/Button";
+import logo from '../assets/gsynergy_logo.svg'
 import { ButtonStandardSize } from "./const";
 
 function Header() {
@@ -13,8 +14,9 @@ function Header() {
     }
     return (
         <>
-        <header className="">
-            <img src='src/assets/gsynergy_logo.png' alt="GSynergy Logo" width="20px" />
+        <header className="bg-white">
+            <link rel="icon" type="image/svg+xml" href="" />
+            <img src={logo} alt="GSynergy Logo" height="40px" />
             <text>Data Viewer</text>
             <section className="header_rightsection">
                 <Button color={`bg-stone-200 ${ButtonStandardSize} hover:bg-stone-400 transition `} onClick={handlePopup} >Upload file</Button>

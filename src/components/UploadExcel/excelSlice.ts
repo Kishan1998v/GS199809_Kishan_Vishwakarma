@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { StoreMap } from "../const";
 
 interface ExcelState {
     excelData: Record<string, any>; // Object to store extracted data
@@ -9,11 +10,12 @@ interface ExcelState {
     Calculations: Record<string, any>
     Chart: Record<string, any>
     open: boolean;
+    [key: string]: any;
 }
 
 const initialState: ExcelState = {
     excelData: {},
-    Stores: {},
+    Stores: [StoreMap.row],
     SKUs: {},
     Calender: {},
     Planning: {},
@@ -54,9 +56,21 @@ const excelSlice = createSlice({
         },
         setPopupState: (state, action) => {
             state.open = action.payload;
-        }
+        },
+        addNewData:(state,action)=>{
+            state[action.payload.type] = [...state[action.payload.type] ,action.payload.data]
+        },
+        updateStoreData: (state, action) => {
+            state.Stores = state.Stores.map((item : any) =>
+              item.id === action.payload.id ? action.payload : item
+            );
+        },
+        deleteStoreData: (state, action) => {
+            state.Stores = state.Stores.filter((item : any) => item.id !== action.payload);
+        },
+      
     },
 });
 
-export const { setExcelData, clearExcelData,setPopupState } = excelSlice.actions;
+export const { setExcelData, clearExcelData,setPopupState,addNewData,updateStoreData,deleteStoreData } = excelSlice.actions;
 export default excelSlice.reducer;

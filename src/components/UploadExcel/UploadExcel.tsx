@@ -58,7 +58,12 @@ const Upload: React.FC = () => {
                     const formattedData = dataRows.map((row) => {
                         let rowObject: Record<string, any> = {};
                         headers.forEach((header: string, index: number) => {
-                            rowObject[header] = row[index] || null;
+                            if(index==0 && header=="Seq No."){
+                                rowObject['Seq'] = row[index] || null
+                            }
+                            else{
+                                rowObject[header] = row[index] || null;
+                            }
                         });
                         return rowObject;
                     });

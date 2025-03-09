@@ -15,7 +15,5 @@
   }
   
   main {
-    background: lightgray;
     flex: 1;
-    padding: 20px;
   }
