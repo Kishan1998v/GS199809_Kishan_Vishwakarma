@@ -20,7 +20,8 @@ function Store(){
         return Object.keys(rowData[0]).map((value) => (
             { 
                 field: value ,
-                editable : value.toLowerCase() !== "id" && value.toLowerCase() !== 'seq'
+                editable : value.toLowerCase() !== "id" && value.toLowerCase() !== 'seq',
+                rowDrag:value.toLowerCase() == 'seq' ,
             }
         ));
     }, [rowData]); // Add rowData as a dependency
@@ -35,15 +36,23 @@ function Store(){
 
     // Handle row deletion
     const handleDelete = (id: string | number) => {
-        dispatch(deleteStoreData(id)); // Dispatch Redux action to delete row
+        let newStoreData = rowData.filter((val:any)=> val.ID !== id)
+        dispatch(deleteStoreData(newStoreData)); // Dispatch Redux action to delete row
     };
 
     // Handle row drag and drop
     const onRowDragEnd = (event: any) => {
         const movedRow = event.node.data;
+        const fromIndex = event.node.rowIndex;
+        const toIndex = event.overIndex;
+    
+        if (fromIndex === toIndex || toIndex == null) return; // Prevent unnecessary updates
+    
+        // a new array with updated positions
         const newData = [...rowData];
-        newData.splice(event.overIndex, 0, newData.splice(event.node.rowIndex, 1)[0]);
-        // Assuming you have an action to reorder data in Redux
+        const [removed] = newData.splice(fromIndex, 1);
+        newData.splice(toIndex, 0, removed);
+    
         dispatch(updateStoreData(newData)); 
     };
 
@@ -56,9 +65,10 @@ function Store(){
                 rowData={rowData} 
                 columnDefs={[ {
                     headerName: "Actions",
-                    rowDrag:true,
                     cellRenderer: (params:any) => (
-                        <button onClick={() => handleDelete(params.data.id)}>Delete</button>
+                        <Button color={`p-2 bg-blue-600 rounded-lg`} onClick={() => handleDelete(params.data.ID)}>
+                            <img width="13" height="13" src="https://img.icons8.com/material-rounded/24/FFFFFF/delete.png" alt="delete"/>
+                        </Button>
                     ),
                   },...colDefs]} 
                 defaultColDef={defaultColDef} 

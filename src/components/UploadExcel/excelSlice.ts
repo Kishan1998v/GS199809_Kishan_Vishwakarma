@@ -62,12 +62,13 @@ const excelSlice = createSlice({
             state[action.payload.type] = [...state[action.payload.type] ,action.payload.data]
         },
         updateStoreData: (state, action) => {
-            state.Stores = state.Stores.map((item : any) =>
-              item.id === action.payload.id ? action.payload : item
-            );
+            state.Stores = action.payload;
         },
         deleteStoreData: (state, action) => {
-            state.Stores = state.Stores.filter((item : any) => item.id !== action.payload);
+            state.Stores = action.payload;
+        },
+        deleteSkuData: (state, action) => {
+            state.SKUs = action.payload;
         },
         addPlanner:(state,action)=>{
             state.Planning = action.payload
@@ -85,5 +86,5 @@ const excelSlice = createSlice({
     },
 });
 
-export const {updatePlanner,addCalculation,updateCalculation, setExcelData, clearExcelData,setPopupState,addNewData,updateStoreData,deleteStoreData,addPlanner } = excelSlice.actions;
+export const {deleteSkuData,updatePlanner,addCalculation,updateCalculation, setExcelData, clearExcelData,setPopupState,addNewData,updateStoreData,deleteStoreData,addPlanner } = excelSlice.actions;
 export default excelSlice.reducer;
