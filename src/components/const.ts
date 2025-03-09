@@ -1,6 +1,8 @@
 import Store from './Store/Store';
 import Sku from './SKU/Sku';
 import Planning from './Planning/Planning';
+import Charts from './Charts/Charts';
+
 
 const navigation = [
     {
@@ -29,7 +31,7 @@ const navigation = [
         name:"Chart",
         image:'https://img.icons8.com/fluency-systems-filled/48/graph.png' ,
         alt:"graph",
-        component: Store
+        component: Charts
     },
 ]
 
