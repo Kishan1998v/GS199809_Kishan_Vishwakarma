@@ -11,6 +11,10 @@ Currently, two official plugins are available:
 
 This project is a Data Viewer application built with React, TypeScript, and Vite. It allows users to upload Excel files, view and manipulate data in tables, and visualize data using charts.
 
+## Live link : 
+
+https://kishan1998v.github.io/GS199809_Kishan_Vishwakarma/
+
 ## Table of Contents
 
 - [Installation](#installation)
