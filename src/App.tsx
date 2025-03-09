@@ -1,13 +1,13 @@
-import React from 'react'
 import './App.css'
+import Header from './components/Header'
+import Home from './components/Home'
+
 
 function App() {
   return (
     <>
-      <div>Welcome</div>
-      <div className="min-h-screen bg-blue-500 text-white flex items-center justify-center text-3xl">
-      Tailwind is working! 🚀
-    </div>
+      <Header />
+      <Home />
     </>
   )
 }

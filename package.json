@@ -10,9 +10,20 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@ag-grid-community/client-side-row-model": "^32.3.3",
+    "@ag-grid-community/core": "^32.3.3",
+    "@reduxjs/toolkit": "^2.6.1",
     "@tailwindcss/postcss": "^4.0.12",
+    "ag-charts-react": "^11.1.1",
+    "ag-grid-community": "^33.1.1",
+    "ag-grid-enterprise": "^33.1.1",
+    "ag-grid-react": "^33.1.1",
+    "firebase": "^11.4.0",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-redux": "^9.2.0",
+    "react-router-dom": "^7.3.0",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",
