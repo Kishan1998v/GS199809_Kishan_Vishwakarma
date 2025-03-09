@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/store";
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import AgTable from "../AgTable/AgTable";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
@@ -42,7 +42,6 @@ function Store(){
 
     // Handle row drag and drop
     const onRowDragEnd = (event: any) => {
-        const movedRow = event.node.data;
         const fromIndex = event.node.rowIndex;
         const toIndex = event.overIndex;
     

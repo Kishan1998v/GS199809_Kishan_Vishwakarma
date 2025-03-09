@@ -5,7 +5,7 @@ import AgTable from "../AgTable/AgTable";
 import Button from "../Common/Button";
 import { ButtonStandardSize } from "../const";
 import AddItems from "../AddItem/AddItem";
-import { deleteSkuData, deleteStoreData } from "../UploadExcel/excelSlice";
+import { deleteSkuData } from "../UploadExcel/excelSlice";
 
 function Sku(){
     let dispatch = useDispatch()

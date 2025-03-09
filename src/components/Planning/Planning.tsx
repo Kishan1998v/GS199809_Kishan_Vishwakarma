@@ -100,7 +100,7 @@ const generateColumnDefs = (calendarMap: any) => {
     const monthGroups: any = {};
 
     // Group weeks under respective months
-    calendarMap.forEach(({ Month, Week, "Month Label": monthLabel, "Week Label": weekLabel, }: any) => {
+    calendarMap.forEach(({ Week, "Month Label": monthLabel, "Week Label": weekLabel, }: any) => {
         if (!monthGroups[monthLabel]) {
             monthGroups[monthLabel] = [];
         }
@@ -221,6 +221,7 @@ function Planning() {
         if (gridRef.current) {
             const currentPage = gridRef.current.api;
             console.log("Current Page:", currentPage);
+            setPage(1)
         }
     };
 

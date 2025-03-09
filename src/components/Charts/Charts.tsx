@@ -57,7 +57,7 @@ const SelectStore = React.memo(({store,data,setStore}:any)=>{
 const Charts = () => {
   const Data = useSelector((state: RootState) => state.excel);
   const [store, setStore] = useState(Data.Stores[0].ID)  
-  const [options, setOptions] = useState({
+  const [options, setOptions] = useState<any>({
     height:399,
     series: [
         { type: "bar", xKey: "Week", yKey: "GM Dollars" },
