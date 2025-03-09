@@ -1,4 +1,5 @@
 header {
+  z-index: 100;
   padding-inline: 10px;
   height: 50px;
   position: fixed;
