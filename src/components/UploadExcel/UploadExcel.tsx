@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import * as XLSX from "xlsx";
 import Loader from "../Common/Loading";
 import { useDispatch } from "react-redux";
-import { setExcelData,setPopupState} from "./excelSlice";
+import { setExcelData, setPopupState } from "./excelSlice";
 
 import Button from "../Common/Button";
 
@@ -26,7 +26,6 @@ const Upload: React.FC = () => {
     };
 
     const handleProcessData = () => {
-        console.log(selectedFile)
         if (!selectedFile) {
             alert("No file selected! Please choose an Excel file first.");
             return;
@@ -50,29 +49,56 @@ const Upload: React.FC = () => {
             workbook.SheetNames.forEach((sheetName) => {
                 const worksheet = workbook.Sheets[sheetName];
                 const sheetArray = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+                if (sheetName === 'Planning' || sheetName === 'Calculations') {
+                    if (sheetArray.length > 1) {
+                        const headers:any = sheetArray[0];
+                        const dataRows = sheetArray.slice(1);
 
-                if (sheetArray.length > 1) {
-                    const headers = sheetArray[0];
-                    const dataRows = sheetArray.slice(1);
+                        let formattedData: Record<string, any> = {};
 
-                    const formattedData = dataRows.map((row) => {
-                        let rowObject: Record<string, any> = {};
-                        headers.forEach((header: string, index: number) => {
-                            if(index==0 && header=="Seq No."){
-                                rowObject['Seq'] = row[index] || null
-                            }
-                            else{
-                                rowObject[header] = row[index] || null;
+                        dataRows.forEach((row:any) => {
+                            let rowObject: Record<string, any> = {};
+                            let uniqueID = `${row[0]}_${row[1]}_${row[2]}`;
+                            headers.forEach((header: string, index: number) => {
+                                if (index === 0 && header === "Seq No.") {
+                                    rowObject['Seq'] = row[index] || null;
+                                } else {
+                                    rowObject[header] = row[index] || null;
+                                }
+                            });
+
+                            if (uniqueID) {
+                                formattedData[uniqueID] = rowObject;
                             }
                         });
-                        return rowObject;
-                    });
-                    console.log(sheetName)
-                    dispatch(setExcelData({ sheetName: sheetName, data: formattedData }));
+                        dispatch(setExcelData({ sheetName: sheetName, data: formattedData }));
+                    }
+
+                }
+                else {
+                    if (sheetArray.length > 1) {
+                        const headers:any = sheetArray[0];
+                        const dataRows = sheetArray.slice(1);
+
+                        const formattedData = dataRows.map((row:any) => {
+                            let rowObject: Record<string, any> = {};
+                            headers.forEach((header: string, index: number) => {
+                                if (index == 0 && header == "Seq No.") {
+                                    rowObject['Seq'] = row[index] || null
+                                }
+                                else {
+                                    rowObject[header] = row[index] || null;
+                                }
+                            });
+                            return rowObject;
+                        });
+                        dispatch(setExcelData({ sheetName: sheetName, data: formattedData }));
+                    }
                 }
             });
             setIsLoading(false);
             alert("File processed successfully!");
+            handlePopupClose()
         };
 
         reader.onerror = () => {
@@ -86,11 +112,10 @@ const Upload: React.FC = () => {
     }
 
     return (
-
         <div className=" w-100 h-100 r-0 fixed z-10 right-1 top-14 max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
             <div className="absolute right-3 top-3 cursor-pointer" onClick={handlePopupClose}>
                 <svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                 </svg>
             </div>
             <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Upload Excel</h5>

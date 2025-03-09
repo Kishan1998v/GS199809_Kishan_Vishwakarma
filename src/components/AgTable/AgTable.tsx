@@ -3,6 +3,7 @@ import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
 import { AllCommunityModule, ModuleRegistry, provideGlobalGridOptions, themeBalham } from 'ag-grid-community';
 import { themeQuartz } from 'ag-grid-community';
+import { useEffect, useRef, useState } from 'react';
 
 // to use myTheme in an application, pass it to the theme grid option
 const myTheme = themeBalham
@@ -12,8 +13,26 @@ ModuleRegistry.registerModules([AllCommunityModule]);
 provideGlobalGridOptions({ theme: "legacy"});
 
 export default function AgTable({rowData ,columnDefs,defaultColDef,...props} :any){
+    // const gridRef = useRef<any>(null);
+    // const [currentPage, setCurrentPage] = useState(0);
+    // const [pageSize, setPageSize] = useState(10);
+
+    // const onPaginationChanged = () => {
+    //     if (gridRef.current && gridRef.current.api) {
+    //         const api = gridRef.current.api;
+    //         if (api.paginationIsLastPageFound()) {
+    //             setCurrentPage(api.paginationGetCurrentPage() + 1);
+    //         }
+    //     }
+    // };
+
+    // useEffect(() => {
+    //     if (gridRef.current && gridRef.current.api) {
+    //         gridRef.current.api.paginationSetPageSize(pageSize);
+    //     }
+    // }, [pageSize]);
     return(
-        <div className="ag-theme-quartz" style={{ height: 400 }}>
+        <div className="ag-theme-quartz" style={{ height: 510 }}>
             <AgGridReact rowData={rowData}  columnDefs={columnDefs} defaultColDef={defaultColDef} 
              {...props}
             />

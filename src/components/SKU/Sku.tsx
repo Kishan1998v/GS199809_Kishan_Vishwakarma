@@ -1,10 +1,16 @@
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import AgTable from "../AgTable/AgTable";
 import Button from "../Common/Button";
 import { ButtonStandardSize } from "../const";
+import AddItems from "../AddItem/AddItem";
+
 function Sku(){
+    const [showInputSection , setInputSection] = useState(false)
+    function handleAddNew (){
+        setInputSection(true)
+    }
     //Row Data 
     const rowData = useSelector((state: RootState) => state.excel.SKUs);
     // Column Definitions: Defines the columns to be displayed.
@@ -18,6 +24,11 @@ function Sku(){
     return(
         <>
             <AgTable rowData={rowData} columnDefs={colDefs} defaultColDef={defaultColDef} />
+            <div className={`bg-white pl-2 relative`} >
+                {showInputSection ? <AddItems colDefs={colDefs} rowlastData={rowData[rowData.length-1]} ComponentType="SKUs" setInputSection={setInputSection}/>
+                  :<Button onClick={handleAddNew} color={`${ButtonStandardSize} bg-orange-300`}>Add Store</Button>
+                }
+            </div>
         </>
     );
 }

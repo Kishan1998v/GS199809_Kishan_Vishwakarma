@@ -1,7 +1,7 @@
 import Upload from "./UploadExcel/UploadExcel";
 import { useDispatch,useSelector } from "react-redux";
 import { setPopupState} from "./UploadExcel/excelSlice";
-import { RootState } from "../../store/store";
+import { RootState } from "../store/store";
 import Button from "./Common/Button";
 import logo from '../assets/gsynergy_logo.svg'
 import { ButtonStandardSize } from "./const";

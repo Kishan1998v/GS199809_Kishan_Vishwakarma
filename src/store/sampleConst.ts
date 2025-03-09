@@ -1,4 +1,4 @@
-let CalenderMap = [
+export let CalenderMap = [
     {
         "Seq No.": 1,
         "Week": "W01",
